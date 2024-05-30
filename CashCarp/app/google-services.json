@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463599840659",
+    "project_id": "cashcarp-f054d",
+    "storage_bucket": "cashcarp-f054d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463599840659:android:bc37c289cc234785b30c66",
+        "android_client_info": {
+          "package_name": "com.proyecto.cashcarp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmUSjNkkaHCiy1k5ocumuPWgrNiYe3u9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

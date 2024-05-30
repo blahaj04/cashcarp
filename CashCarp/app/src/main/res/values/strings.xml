@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CashCarp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="texto_boton_saltar">Saltar</string>
+    <string name="texto_boton_volver">Volver</string>
+    <string name="texto_boton_siguiente">Siguiente</string>
+</resources>
