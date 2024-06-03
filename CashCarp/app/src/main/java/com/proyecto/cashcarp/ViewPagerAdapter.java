@@ -47,6 +47,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slider_layout,container,false);
 
@@ -61,5 +62,6 @@ public class ViewPagerAdapter extends PagerAdapter {
         container.addView(view);
 
         return view;
+
     }
 }
