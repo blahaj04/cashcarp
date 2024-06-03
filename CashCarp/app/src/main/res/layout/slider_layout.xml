@@ -6,9 +6,10 @@
 
 
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="335dp"
+        android:id="@+id/tutorialImage"
+        android:layout_width="339dp"
+        android:layout_height="241dp"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:src="@drawable/foto_tutorial_1" />
 
@@ -17,16 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/GothamBold"
         android:text="@string/titulo_tutorial_1"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="28dp"
-        android:fontFamily=""
-       />
+        android:textSize="28sp" />
 
     <TextView
+        android:id="@+id/tutorialDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:fontFamily="@font/GothamBook"
+        android:text="@string/descripcion_tutorial_1"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
 
 
 </LinearLayout>

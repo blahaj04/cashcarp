@@ -6,4 +6,9 @@
     <string name="texto_boton_volver">Volver</string>
     <string name="texto_boton_siguiente">Siguiente</string>
     <string name="titulo_tutorial_1">Es la hora de que empieces a ahorrar</string>
+    <string name="titulo_tutorial_2">Tu balance a un solo toque</string>
+    <string name="titulo_tutorial_3">Analiza tus gastos de un vistazo</string>
+    <string name="descripcion_tutorial_1">Crea tus gastos e ingresos pulsando el icono + en la mitad de la barra de herramientas situada en la base de la pantalla</string>
+    <string name="descripcion_tutorial_2">Puedes ver tus gastos o ingresos pulsando en cualquiera de los respectivos iconos situados arriba.</string>
+    <string name="descripcion_tutorial_3">Cashcarp analiza tus gastos e ingresos y hace gráficas para que puedas ver fácilmente cuanto y como gastas el dinero.</string>
 </resources>
