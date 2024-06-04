@@ -7,63 +7,6 @@
     android:background="@color/material_dynamic_neutral_variant60"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/botonSaltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:text="@string/texto_boton_saltar"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/slideViewPager"
-        android:layout_width="411dp"
-        android:layout_height="518dp"
-        android:layout_marginVertical="60dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/botonVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/texto_boton_volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/pastel_red"
-        android:textColor="@color/black"/>
-
-    <Button
-        android:id="@+id/botonSiguiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/pastel_green"
-        android:text="@string/texto_boton_siguiente"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/paginaIndicador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:background="#00000000"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/slideViewPager">
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
