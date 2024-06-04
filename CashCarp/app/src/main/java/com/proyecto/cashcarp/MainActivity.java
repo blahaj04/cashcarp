@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//ala
 public class MainActivity extends AppCompatActivity {
 private static final String TAG = "";
     @Override
