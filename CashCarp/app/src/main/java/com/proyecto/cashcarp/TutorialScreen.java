@@ -62,7 +62,7 @@ public class TutorialScreen extends AppCompatActivity {
         });
 
         mSlideViewPager = findViewById(R.id.slideViewPager);
-        mDotLayout = findViewById(R.id.paginaIndicador);
+        mDotLayout = findViewById(R.id.pageIndicator);
 
         viewPagerAdapter = new ViewPagerAdapter(this);
 
