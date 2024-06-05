@@ -13,16 +13,18 @@
         android:theme="@style/Theme.CashCarp"
         tools:targetApi="31">
         <activity
-            android:name=".TutorialScreen"
+            android:name=".pantallas.TutorialScreen"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".pantallas.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pantallas.CreateAccountActivity"
             android:exported="false" />
 
-
         <activity
-            android:name=".SplashActivity"
+            android:name=".pantallas.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>

@@ -11,4 +11,16 @@
     <string name="descripcion_tutorial_1">Crea tus gastos e ingresos pulsando el icono + en la mitad de la barra de herramientas situada en la base de la pantalla</string>
     <string name="descripcion_tutorial_2">Puedes ver tus gastos o ingresos pulsando en cualquiera de los respectivos iconos situados arriba.</string>
     <string name="descripcion_tutorial_3">Cashcarp analiza tus gastos e ingresos y hace gráficas para que puedas ver fácilmente cuanto y como gastas el dinero.</string>
+    <string name="createAcountTitleText">Crea tu cuenta ahora</string>
+    <string name="emailTextBox">Email</string>
+    <string name="apodoTexto">Apodo</string>
+    <string name="emailLabel">Email:</string>
+    <string name="emailFieldText">Introduce tu email</string>
+    <string name="contrasenaLabel">Contraseña:</string>
+    <string name="contrasenaTextField">Introduce tu contraseña</string>
+    <string name="apodoLabel">Apodo:</string>
+    <string name="apodoTextField">Introduce tu apodo</string>
+    <string name="presupuestoLabel">Presupuesto:</string>
+    <string name="presupuestoTextLabel">Introduce tu presupuesto</string>
+    <string name="crearCuentaBotonTexto">Crear cuenta</string>
 </resources>
