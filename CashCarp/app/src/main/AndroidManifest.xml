@@ -17,14 +17,14 @@
             android:exported="false" />
 
         <activity
-            android:name=".pantallas.MainActivity"
+            android:name=".pantallas.MainScreen"
             android:exported="false" />
         <activity
             android:name=".pantallas.CreateAccountActivity"
             android:exported="false" />
 
         <activity
-            android:name=".pantallas.SplashActivity"
+            android:name=".pantallas.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>

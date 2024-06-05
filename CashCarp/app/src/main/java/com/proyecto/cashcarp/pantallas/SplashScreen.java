@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.proyecto.cashcarp.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, TutorialScreen.class);
+                Intent i = new Intent(SplashScreen.this, TutorialScreen.class);
                 startActivity(i);
                 finish();
             }
