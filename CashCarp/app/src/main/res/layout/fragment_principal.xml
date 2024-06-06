@@ -7,9 +7,152 @@
     android:background="@color/material_dynamic_neutral_variant60">
 
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="194dp"
+        android:background="@color/pastel_blue"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="77dp"
+                android:layout_height="52dp"
+                android:src="@drawable/cashcarp_transparente" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_bold"
+                android:padding="8dp"
+                android:text="@string/holaTextPantPrin"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_book"
+                android:padding="8dp"
+                android:text="@string/nombreuserTextPantPrin"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@color/pastel_purple"
+                android:padding="8dp"
+                android:text="TextView 4"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_yellow"
+                android:padding="8dp"
+                android:text="TextView 5"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_orange"
+                android:padding="8dp"
+                android:text="TextView 6"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tercer LinearLayout Horizontal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_pink"
+                android:padding="8dp"
+                android:text="TextView 7"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_violet"
+                android:padding="8dp"
+                android:text="TextView 8"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_teal"
+                android:padding="8dp"
+                android:text="TextView 9"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Cuarto LinearLayout Horizontal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_peach"
+                android:padding="8dp"
+                android:text="TextView 10"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_lavender"
+                android:padding="8dp"
+                android:text="TextView 11"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/pastel_mint"
+                android:padding="8dp"
+                android:text="TextView 12"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>
