@@ -1,4 +1,4 @@
-package com.proyecto.cashcarp;
+package com.proyecto.cashcarp.clases;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.proyecto.cashcarp.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
     Context context;

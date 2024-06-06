@@ -1,4 +1,4 @@
-package com.proyecto.cashcarp;
+package com.proyecto.cashcarp.pantallas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.ViewPagerAdapter;
 
 public class TutorialScreen extends AppCompatActivity {
 
@@ -45,7 +48,7 @@ public class TutorialScreen extends AppCompatActivity {
                 if (getItem(0) < 2) {
                     mSlideViewPager.setCurrentItem(getItem(+1), true);
                 } else {
-                    Intent i = new Intent(TutorialScreen.this, MainActivity.class);
+                    Intent i = new Intent(TutorialScreen.this, CreateAccountActivity.class);
                     startActivity(i);
                     finish();
                 }
@@ -55,7 +58,7 @@ public class TutorialScreen extends AppCompatActivity {
         btnSaltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TutorialScreen.this, MainActivity.class);
+                Intent i = new Intent(TutorialScreen.this, CreateAccountActivity.class);
                 startActivity(i);
                 finish();
             }
