@@ -25,4 +25,6 @@
     <string name="crearCuentaBotonTexto">Crear cuenta</string>
     <string name="yaTengoCuentaBotonTexto">Ya tengo una cuenta</string>
     <string name="InicarSesionTitleText">Inicia sesión</string>
+    <string name="textoBotonInicarSesion">Iniciar Sesion</string>
+    <string name="buttonTextNoTengoCuenta">No tengo cuenta</string>
 </resources>

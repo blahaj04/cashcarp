@@ -1,6 +1,8 @@
 package com.proyecto.cashcarp.pantallas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -38,11 +40,14 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText budgetEditText;
     private FirebaseFirestore db;
 
+    private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_screen);
+        sharedPreferences = getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
 
         db = FirebaseFirestore.getInstance();
 
@@ -63,7 +68,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         alreadyWithAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //shared preffs tutorial done true
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("tutorialHecho", true);
+                editor.apply();
 
                 Intent goToLoginScreen = new Intent(CreateAccountActivity.this, IniciarSesionScreen.class);
                 startActivity(goToLoginScreen);
@@ -109,6 +117,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference userDocumentReference) {
                             Toast.makeText(CreateAccountActivity.this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
+
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean("tutorialHecho", true);
+                            editor.apply();
 
                             insertarDatosIniciales(userDocumentReference);
 
