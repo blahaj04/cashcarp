@@ -18,10 +18,20 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.TipoGasto;
+import com.proyecto.cashcarp.clases.TipoIngreso;
 import com.proyecto.cashcarp.clases.Usuario;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
+
+    // Tipos de gasto
+    private static final TipoGasto tipoGasto1 = new TipoGasto("#FF6961", "Comida");
+    private static final TipoGasto tipoGasto2 = new TipoGasto("#77DD77", "Transporte");
+
+    // Tipos de ingreso
+    private static final TipoIngreso tipoIngreso1 = new TipoIngreso("#AEC6CF", "Paga semanal");
+    private static final TipoIngreso tipoIngreso2 = new TipoIngreso("#FFB347", "Regalo");
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText nicknameEditText;
@@ -97,8 +107,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                     .add(user)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
-                        public void onSuccess(DocumentReference documentReference) {
+                        public void onSuccess(DocumentReference userDocumentReference) {
                             Toast.makeText(CreateAccountActivity.this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
+
+                            insertarDatosIniciales(userDocumentReference);
 
                             Intent goToIniciarSesionScreen = new Intent(CreateAccountActivity.this, IniciarSesionScreen.class);
                             startActivity(goToIniciarSesionScreen);
@@ -113,6 +125,15 @@ public class CreateAccountActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private void insertarDatosIniciales(DocumentReference userDocRef) {
+
+        userDocRef.collection("tipoGasto").add(tipoGasto1);
+        userDocRef.collection("tipoGasto").add(tipoGasto2);
+        userDocRef.collection("tipoIngreso").add(tipoIngreso1);
+        userDocRef.collection("tipoIngreso").add(tipoIngreso2);
+
     }
 
     private boolean isNumeric(String str) {

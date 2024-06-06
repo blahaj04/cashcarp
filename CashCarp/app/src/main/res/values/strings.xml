@@ -24,4 +24,5 @@
     <string name="presupuestoTextLabel">Introduce tu presupuesto</string>
     <string name="crearCuentaBotonTexto">Crear cuenta</string>
     <string name="yaTengoCuentaBotonTexto">Ya tengo una cuenta</string>
+    <string name="InicarSesionTitleText">Inicia sesión</string>
 </resources>
