@@ -23,7 +23,6 @@ import com.proyecto.cashcarp.R;
 
 public class IniciarSesionScreen extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
-    private static String userid;
     private EditText emailEditText;
     private EditText passwordEditText;
     private FirebaseFirestore db;
@@ -34,7 +33,6 @@ public class IniciarSesionScreen extends AppCompatActivity {
         setContentView(R.layout.iniciar_sesion_screen);
 
         sharedPreferences = getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
-        userid = sharedPreferences.getString("userId", null);
 
         db = FirebaseFirestore.getInstance();
 

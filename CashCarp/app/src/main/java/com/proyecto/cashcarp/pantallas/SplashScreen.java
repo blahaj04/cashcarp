@@ -22,6 +22,11 @@ public class SplashScreen extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
         tutorialHecho = sharedPreferences.getBoolean("tutorialHecho", false);
 
+        /*
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("tutorialHecho", false);
+        editor.apply();
+         */
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

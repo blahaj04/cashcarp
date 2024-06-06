@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">CashCarp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="texto_boton_saltar">Saltar</string>
     <string name="texto_boton_volver">Volver</string>
     <string name="texto_boton_siguiente">Siguiente</string>
@@ -27,4 +25,11 @@
     <string name="InicarSesionTitleText">Inicia sesión</string>
     <string name="textoBotonInicarSesion">Iniciar Sesion</string>
     <string name="buttonTextNoTengoCuenta">No tengo cuenta</string>
+    <string name="home_text_navbar">Principal</string>
+    <string name="spends_text_navbar">Gastos</string>
+    <string name="add_text_navbar">Crear</string>
+    <string name="incomes_text_navbar">Ingresos</string>
+    <string name="settings_text_navbar">Ajustes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
