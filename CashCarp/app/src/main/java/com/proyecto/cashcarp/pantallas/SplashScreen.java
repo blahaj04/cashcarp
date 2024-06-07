@@ -26,15 +26,15 @@ public class SplashScreen extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("tutorialHecho", false);
         editor.apply();
-         */
+        */
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent i;
-                if(tutorialHecho){
+                if (tutorialHecho) {
                     i = new Intent(SplashScreen.this, IniciarSesionScreen.class);
-                }else{
+                } else {
                     i = new Intent(SplashScreen.this, TutorialScreen.class);
                 }
                 startActivity(i);

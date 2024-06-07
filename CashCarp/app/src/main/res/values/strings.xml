@@ -52,4 +52,9 @@
     <string name="color_text">Color</string>
     <string name="crear_tipo_text">Crear tipo</string>
     <string name="seleccionar_color_btn_text">Seleccionar color</string>
+    <string name="gastos_text">Gastos</string>
+    <string name="description_text">Descripción:</string>
+    <string name="cantidad_label">Cantidad:</string>
+    <string name="fecha_lablel">Fecha:</string>
+    <string name="editar_gasto_text">Editar gasto</string>
 </resources>

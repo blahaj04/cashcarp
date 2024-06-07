@@ -192,7 +192,7 @@ public class CrearFragment extends Fragment {
                     tg.setId(tipoId);
                     tipoGastos.add(tg);
                 }
-                // Después de cargar los tipos de gastos, mostrarlos por defecto
+
                 mostrarTipos(false);
             } else {
                 Toast.makeText(getContext(), "Error al cargar tipos: " + task.getException(), Toast.LENGTH_SHORT).show();
@@ -215,7 +215,7 @@ public class CrearFragment extends Fragment {
     }
 
     private void mostrarTipos(boolean isIngreso) {
-        List<String> listaNombres = obtenerNombres(isIngreso); // Obtener la lista de tipos según sea un ingreso o un gasto
+        List<String> listaNombres = obtenerNombres(isIngreso);
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listaNombres);

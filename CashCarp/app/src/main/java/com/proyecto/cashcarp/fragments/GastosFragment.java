@@ -1,66 +1,86 @@
 package com.proyecto.cashcarp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.Gasto;
+import com.proyecto.cashcarp.clases.MyGastoAdapter;
+import com.proyecto.cashcarp.clases.TipoGasto;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GastosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class GastosFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FirebaseFirestore db;
+    private SharedPreferences sharedPreferences;
+    private String userId;
+    private MyGastoAdapter adapter;
+    private List<Gasto> listaGastos;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public GastosFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GastosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GastosFragment newInstance(String param1, String param2) {
-        GastosFragment fragment = new GastosFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_gastos, container, false);
+
+        sharedPreferences = getContext().getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", null);
+        db = FirebaseFirestore.getInstance();
+
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewGastos);
+        listaGastos = new ArrayList<>();
+        adapter = new MyGastoAdapter(getActivity().getApplicationContext(), listaGastos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        obtenerTodosLosGastos();
+
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gastos, container, false);
+    private void obtenerTodosLosGastos() {
+        db.collection("usuario").document(userId).collection("tipoGasto").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot document : task.getResult()) {
+                    String tipoId = document.getId();
+                    db.collection("usuario").document(userId).collection("tipoGasto").document(tipoId).collection("gastos").get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (DocumentSnapshot gastoDocument : task1.getResult()) {
+                                String cantidad = String.valueOf(gastoDocument.getDouble("cantidad"));
+                                String descripcion = gastoDocument.getString("descripcion");
+                                Timestamp ts = gastoDocument.getTimestamp("ts");
+
+                                Gasto g = new Gasto(descripcion, Double.parseDouble(cantidad), ts);
+                                listaGastos.add(g);
+                            }
+                            Gasto.ordenarGastosPorFecha((ArrayList<Gasto>) listaGastos);
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getContext(), "Error al cargar gastos: " + task1.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } else {
+                Toast.makeText(getContext(), "Error al cargar tipos de gasto: " + task.getException(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

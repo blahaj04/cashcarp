@@ -8,7 +8,7 @@
 
 
     <LinearLayout
-        android:id="@+id/crear_header_layout"
+        android:id="@+id/crear_type_header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/pastel_blue"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crear_header_layout"
+        app:layout_constraintTop_toBottomOf="@+id/crear_type_header_layout"
         app:layout_constraintVertical_bias="0.193">
 
         <LinearLayout

@@ -33,9 +33,6 @@ import java.util.Random;
 
 public class PrincipalFragment extends Fragment {
 
-    public static final int MAXIMO_ITEMS_SCROLL = 10;
-    private LinearLayout transactionsContainer;
-    private TextView noTransactionsMessage;
     private SharedPreferences sharedPreferences;
     private String userId;
 
@@ -44,10 +41,6 @@ public class PrincipalFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_principal, container, false);
-
-        transactionsContainer = view.findViewById(R.id.transactions_container);
-        noTransactionsMessage = view.findViewById(R.id.no_transactions_message);
-
 
         sharedPreferences = getContext().getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", null);
@@ -73,26 +66,7 @@ public class PrincipalFragment extends Fragment {
     }
 
 
-    private void addTransactionView(Object transaction) {
-        View transactionView = LayoutInflater.from(getContext()).inflate(R.layout.item_gasto_ingreso_scroll, transactionsContainer, false);
 
-        TextView descriptionTextView = transactionView.findViewById(R.id.transaction_description);
-        TextView amountTextView = transactionView.findViewById(R.id.transaction_amount);
-
-        if (transaction instanceof Gasto) {
-            Gasto gasto = (Gasto) transaction;
-            descriptionTextView.setText(gasto.getDescripcion());
-            amountTextView.setText(String.format("-$%.2f", gasto.getCantidad()));
-            amountTextView.setTextColor(getResources().getColor(R.color.pastel_red));
-        } else if (transaction instanceof Ingreso) {
-            Ingreso ingreso = (Ingreso) transaction;
-            descriptionTextView.setText(ingreso.getDescripcion());
-            amountTextView.setText(String.format("+$%.2f", ingreso.getCantidad()));
-            amountTextView.setTextColor(getResources().getColor(R.color.pastel_green));
-        }
-
-        transactionsContainer.addView(transactionView);
-    }
 
 
 }

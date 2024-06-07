@@ -26,6 +26,8 @@ import com.proyecto.cashcarp.R;
 import com.proyecto.cashcarp.clases.TipoGasto;
 import com.proyecto.cashcarp.clases.TipoIngreso;
 
+import java.util.Random;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
@@ -35,7 +37,7 @@ public class CreateTypeScreen extends AppCompatActivity {
     EditText typeNameText;
     LinearLayout ll;
 
-    private int typecolor;
+    private String typecolor;
 
     private boolean colorSelected = false, isIngreso = false;
 
@@ -60,7 +62,7 @@ public class CreateTypeScreen extends AppCompatActivity {
         createTypeButton = findViewById(R.id.botonGuardarTipo);
         ll = findViewById(R.id.create_type_layout);
 
-
+cambiarColorHeader();
         db = FirebaseFirestore.getInstance();
         switchGastoIngreso.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isIngreso = isChecked;
@@ -88,11 +90,11 @@ public class CreateTypeScreen extends AppCompatActivity {
         });
     }
 
-    private void guardarObjeto(String name, int typecolor, boolean isIngreso) {
+    private void guardarObjeto(String name, String typecolor, boolean isIngreso) {
 
 
         if (isIngreso) {
-            TipoIngreso ti = new TipoIngreso(name, String.valueOf(typecolor));
+            TipoIngreso ti = new TipoIngreso(typecolor, name );
 
             db.collection("usuario").document(userId).collection("tipoIngreso").add(ti).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
@@ -112,7 +114,7 @@ public class CreateTypeScreen extends AppCompatActivity {
                 }
             });
         }else{
-            TipoGasto tg = new TipoGasto(name, String.valueOf(typecolor));
+            TipoGasto tg = new TipoGasto(typecolor, name);
 
             db.collection("usuario").document(userId).collection("tipoGasto").add(tg).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
@@ -143,10 +145,23 @@ public class CreateTypeScreen extends AppCompatActivity {
 
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
-                typecolor = color;
+                typecolor = convertirColorAHexadecimal(color);
                 colorSelected = true;
             }
         });
         awd.show();
+    }
+    public String convertirColorAHexadecimal(int color) {
+        return String.format("#%06X", (0xFFFFFF & color));
+    }
+    private void cambiarColorHeader() {
+        int[] pastelColors = {R.color.pastel_purple, R.color.pastel_yellow, R.color.pastel_pink, R.color.pastel_violet, R.color.pastel_teal, R.color.pastel_peach, R.color.pastel_lavender, R.color.pastel_mint, R.color.pastel_lilac, R.color.pastel_coral, R.color.pastel_brown, R.color.pastel_grey, R.color.pastel_turquoise, R.color.pastel_magenta, R.color.pastel_cyan, R.color.pastel_banana};
+
+        Random random = new Random();
+        int selectedColor = pastelColors[random.nextInt(pastelColors.length)];
+
+
+        LinearLayout linearLayout = findViewById(R.id.crear_type_header_layout);
+        linearLayout.setBackgroundColor(getResources().getColor(selectedColor));
     }
 }
