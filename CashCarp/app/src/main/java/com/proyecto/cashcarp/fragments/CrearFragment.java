@@ -57,23 +57,22 @@ public class CrearFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
+        cargarTipos();
+
+        mostrarTipos(false);
 
         switchGastoIngreso.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
             mostrarTipos(isChecked);
         });
 
         botonCrearTipo.setOnClickListener(v -> {
-            // Aquí puedes manejar el clic del botón para crear un nuevo tipo
+
             Toast.makeText(getContext(), "Botón crear tipo clickeado", Toast.LENGTH_SHORT).show();
         });
-
         return view;
     }
 
     private void cargarTipos() {
-
-
         db.collection("usuario").document(userId)
                 .collection("tipoGasto")
                 .get()
@@ -87,6 +86,8 @@ public class CrearFragment extends Fragment {
                             tg.setId(tipoId);
                             tipoGastos.add(tg);
                         }
+                        // Después de cargar los tipos de gastos, mostrarlos por defecto
+                        mostrarTipos(false);
                     } else {
                         Toast.makeText(getContext(), "Error al cargar tipos: " + task.getException(), Toast.LENGTH_SHORT).show();
                     }
@@ -99,7 +100,7 @@ public class CrearFragment extends Fragment {
                         for (DocumentSnapshot document : task.getResult()) {
                             String tipoId = document.getId();
                             String colorTipo = document.getString("color");
-                            String nombreTipo = document.getString("nombreTipoGasto");
+                            String nombreTipo = document.getString("nombreTipoIngreso");
                             TipoIngreso ti = new TipoIngreso(colorTipo, nombreTipo);
                             ti.setId(tipoId);
                             tipoIngresos.add(ti);
@@ -113,8 +114,9 @@ public class CrearFragment extends Fragment {
     private void mostrarTipos(boolean isIngreso) {
         List<String> listaNombres = obtenerNombres(isIngreso); // Obtener la lista de tipos según sea un ingreso o un gasto
 
+        Log.d("INFO", "Lista de nombres: " + listaNombres.toString());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, tiposList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listaNombres);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -123,17 +125,23 @@ public class CrearFragment extends Fragment {
 
 
     private List<String> obtenerNombres(boolean isIngreso) {
-        List<String> listaNombres = new ArrayList<String>();
+        List<String> listaNombres = new ArrayList<>();
+
         if (isIngreso) {
             for (TipoIngreso tipo : tipoIngresos) {
-                listaNombres.add(tipo.getNombreTipoIngreso());
+                if (tipo != null && tipo.getNombreTipoIngreso() != null) {
+                    listaNombres.add(tipo.getNombreTipoIngreso());
+                }
             }
         } else {
             for (TipoGasto tipo : tipoGastos) {
-                listaNombres.add(tipo.getNombreTipoGasto());
+                if (tipo != null && tipo.getNombreTipoGasto() != null) {
+                    listaNombres.add(tipo.getNombreTipoGasto());
+                }
             }
-
         }
+
         return listaNombres;
     }
+
 }
