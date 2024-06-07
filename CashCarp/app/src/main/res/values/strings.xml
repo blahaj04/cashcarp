@@ -30,8 +30,14 @@
     <string name="add_text_navbar">Crear</string>
     <string name="incomes_text_navbar">Ingresos</string>
     <string name="settings_text_navbar">Ajustes</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="holaTextPantPrin">Hola:</string>
     <string name="nombreuserTextPantPrin">nombreUser</string>
+    <string name="holaText">Hola:</string>
+    <string name="userNamePantPrin">userText</string>
+    <string name="has_gastado_text">Has gastado</string>
+    <string name="este_mes_text">este mes</string>
+    <string name="has_recibido_text">Has recibido</string>
+    <string name="te_quedan_text">Te quedan</string>
+    <string name="no_hay_ningun_gasto_ni_ingreso_text">no hay ningun gasto ni ingreso</string>
 </resources>

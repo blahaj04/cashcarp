@@ -1,66 +1,133 @@
 package com.proyecto.cashcarp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.ComparadorTransacciones;
+import com.proyecto.cashcarp.clases.Gasto;
+import com.proyecto.cashcarp.clases.Ingreso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PrincipalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class PrincipalFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final int MAXIMO_ITEMS_SCROLL = 10;
+    private LinearLayout transactionsContainer, header;
+    private TextView noTransactionsMessage;
+    private SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    private static final String PREFS_NAME = "AppPrefs";
+    private static final String KEY_COLOR = "navbar_color";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PrincipalFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PrincipalFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PrincipalFragment newInstance(String param1, String param2) {
-        PrincipalFragment fragment = new PrincipalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_principal, container, false);
+        String userId = sharedPreferences.getString("userId", null);
+        transactionsContainer = view.findViewById(R.id.transactions_container);
+        noTransactionsMessage = view.findViewById(R.id.no_transactions_message);
+
+
+        cambiarColorHeader(view);
+
+        loadTransactions(userId);
+
+        return view;
+    }
+
+    private void cambiarColorHeader(View view) {
+        int[] pastelColors = {R.color.pastel_purple, R.color.pastel_yellow, R.color.pastel_pink, R.color.pastel_violet, R.color.pastel_teal, R.color.pastel_peach, R.color.pastel_lavender, R.color.pastel_mint, R.color.pastel_lilac, R.color.pastel_coral, R.color.pastel_brown, R.color.pastel_grey, R.color.pastel_turquoise, R.color.pastel_magenta, R.color.pastel_cyan, R.color.pastel_banana};
+
+        Random random = new Random();
+        int selectedColor = pastelColors[random.nextInt(pastelColors.length)];
+
+
+        LinearLayout linearLayout = view.findViewById(R.id.principal_header_layout);
+        linearLayout.setBackgroundColor(getResources().getColor(selectedColor));
+    }
+
+    private void loadTransactions(String userId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        db.collection("usuarios").document(userId).collection("tipoGasto").orderBy("ts", Query.Direction.DESCENDING).limit(MAXIMO_ITEMS_SCROLL)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Gasto> gastosList = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Gasto gasto = document.toObject(Gasto.class);
+                            gastosList.add(gasto);
+                        }
+
+
+                        db.collection("usuarios").document(userId).collection("tipoIngreso").orderBy("ts", Query.Direction.DESCENDING).limit(MAXIMO_ITEMS_SCROLL)
+                                .get().addOnCompleteListener(task2 -> {
+                                    if (task2.isSuccessful()) {
+                                        List<Ingreso> ingresosList = new ArrayList<>();
+                                        for (QueryDocumentSnapshot document : task2.getResult()) {
+                                            Ingreso ingreso = document.toObject(Ingreso.class);
+                                            ingresosList.add(ingreso);
+                                        }
+
+
+                                        List<Object> combinedList = new ArrayList<>();
+                                        combinedList.addAll(gastosList);
+                                        combinedList.addAll(ingresosList);
+                                        ComparadorTransacciones comparador = new ComparadorTransacciones();
+                                        Collections.sort(combinedList, comparador);
+
+
+                                        if (combinedList.isEmpty()) {
+                                            noTransactionsMessage.setVisibility(View.VISIBLE);
+                                        } else {
+                                            noTransactionsMessage.setVisibility(View.GONE);
+                                            for (Object transaction : combinedList) {
+                                                addTransactionView(transaction);
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                });
+    }
+
+    private void addTransactionView(Object transaction) {
+        View transactionView = LayoutInflater.from(getContext()).inflate(R.layout.item_gasto_ingreso_scroll, transactionsContainer, false);
+
+        TextView descriptionTextView = transactionView.findViewById(R.id.transaction_description);
+        TextView amountTextView = transactionView.findViewById(R.id.transaction_amount);
+
+        if (transaction instanceof Gasto) {
+            Gasto gasto = (Gasto) transaction;
+            descriptionTextView.setText(gasto.getDescripcion());
+            amountTextView.setText(String.format("-$%.2f", gasto.getCantidad()));
+            amountTextView.setTextColor(getResources().getColor(R.color.pastel_red));
+        } else if (transaction instanceof Ingreso) {
+            Ingreso ingreso = (Ingreso) transaction;
+            descriptionTextView.setText(ingreso.getDescripcion());
+            amountTextView.setText(String.format("+$%.2f", ingreso.getCantidad()));
+            amountTextView.setTextColor(getResources().getColor(R.color.pastel_green));
         }
+
+        transactionsContainer.addView(transactionView);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_principal, container, false);
-    }
+
 }

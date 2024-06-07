@@ -19,6 +19,14 @@ public class Ingreso {
         this.ts = ts;
     }
 
+    public Timestamp getTs() {
+        return ts;
+    }
+
+    public void setTs(Timestamp ts) {
+        this.ts = ts;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
