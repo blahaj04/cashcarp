@@ -47,4 +47,9 @@
     <string name="tipo_text_crear_pant">Tipo</string>
     <string name="crear_tipo_btn_text">Crear tipo</string>
     <string name="save_text_btn">Guardar</string>
+    <string name="tipo_gasto_tipo_ingreso_text">Tipo Gasto/ Tipo Ingreso</string>
+    <string name="nombre_text">Nombre</string>
+    <string name="color_text">Color</string>
+    <string name="crear_tipo_text">Crear tipo</string>
+    <string name="seleccionar_color_btn_text">Seleccionar color</string>
 </resources>
