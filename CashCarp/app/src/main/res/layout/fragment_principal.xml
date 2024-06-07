@@ -106,13 +106,15 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/IncomeTextView"
+                android:id="@+id/incomesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="@color/pastel_green"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="23sp"
                 android:padding="8dp"
                 android:text=""
+                android:background="@color/pastel_green"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -148,9 +150,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:background="@color/pastel_orange"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="23sp"
                 android:padding="8dp"
                 android:text=""
+                android:background="@color/pastel_orange"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -167,6 +171,44 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/habilitar_grafico_text"
+            android:fontFamily="@font/gotham_book"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchEnableGraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/graphContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:padding="16dp"
+        android:layout_marginTop="350dp"
+        android:gravity="center">
+
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/barChart"/>
+
+    </LinearLayout>
 
 </FrameLayout>

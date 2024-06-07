@@ -65,4 +65,5 @@
     <string name="activar_tutorial_text">Activar tutorial</string>
     <string name="cambiar_presupuesto_text">Cambiar presupuesto</string>
     <string name="actualizar_text">Actualizar</string>
+    <string name="habilitar_grafico_text">Alternar gáfica gastos/ingresos\n</string>
 </resources>

@@ -51,12 +51,12 @@ public class IngresoFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
-        obtenerTodosLosGastos();
+        obtenerTodosLosIngresos();
 
         return view;
     }
 
-    private void obtenerTodosLosGastos() {
+    private void obtenerTodosLosIngresos() {
         db.collection("usuario").document(userId).collection("tipoIngreso").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (DocumentSnapshot document : task.getResult()) {

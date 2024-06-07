@@ -14,6 +14,9 @@ public class Ingreso {
 
     private String id;
 
+    private String tipoNombre;
+
+
 
     private String tipoId;
     private String color;
@@ -27,6 +30,13 @@ public class Ingreso {
         this.ts = ts;
     }
 
+    public String getTipoNombre() {
+        return tipoNombre;
+    }
+
+    public void setTipoNombre(String tipoNombre) {
+        this.tipoNombre = tipoNombre;
+    }
     public Timestamp getTs() {
         return ts;
     }

@@ -16,6 +16,10 @@ public class Gasto {
 
     private String id;
 
+    private String tipoNombre;
+
+
+
     private String tipoId;
     private String color;
 
@@ -31,6 +35,25 @@ public class Gasto {
 
     }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setTs(Timestamp ts) {
+        this.ts = ts;
+    }
+
+    public String getTipoNombre() {
+        return tipoNombre;
+    }
+
+    public void setTipoNombre(String tipoNombre) {
+        this.tipoNombre = tipoNombre;
+    }
     public String getId() {
         return id;
     }
