@@ -1,66 +1,103 @@
 package com.proyecto.cashcarp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.Gasto;
+import com.proyecto.cashcarp.clases.Ingreso;
+import com.proyecto.cashcarp.clases.MyGastoAdapter;
+import com.proyecto.cashcarp.clases.MyIngresoAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link IngresoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class IngresoFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FirebaseFirestore db;
+    private SharedPreferences sharedPreferences;
+    private String userId;
+    private MyIngresoAdapter adapter;
+    private List<Ingreso> listaIngresos;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public IngresoFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment IngresoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static IngresoFragment newInstance(String param1, String param2) {
-        IngresoFragment fragment = new IngresoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_ingreso, container, false);
+        cambiarColorHeader(view);
+        sharedPreferences = requireContext().getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", null);
+        db = FirebaseFirestore.getInstance();
+
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewIngresos);
+        listaIngresos = new ArrayList<>();
+        adapter = new MyIngresoAdapter(requireContext(), listaIngresos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
+
+        obtenerTodosLosGastos();
+
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ingreso, container, false);
+    private void obtenerTodosLosGastos() {
+        db.collection("usuario").document(userId).collection("tipoIngreso").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DocumentSnapshot document : task.getResult()) {
+                    String tipoId = document.getId();
+                    String color = document.getString("color");
+                    db.collection("usuario").document(userId).collection("tipoIngreso").document(tipoId).collection("ingresos").get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (DocumentSnapshot gastoDocument : task1.getResult()) {
+                                String cantidad = String.valueOf(gastoDocument.getDouble("cantidad"));
+                                String descripcion = gastoDocument.getString("descripcion");
+                                Timestamp ts = gastoDocument.getTimestamp("ts");
+                                String id = gastoDocument.getId();
+
+                                Ingreso i = new Ingreso(descripcion, Double.parseDouble(cantidad), ts);
+
+                                i.setColor(color);
+                                i.setTipoId(tipoId);
+                                i.setId(id);
+                                listaIngresos.add(i);
+                            }
+                            Ingreso.ordenarIngresosPorFecha((ArrayList<Ingreso>) listaIngresos);
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(requireContext(), "Error al cargar Ingresos: " + task1.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } else {
+                Toast.makeText(requireContext(), "Error al cargar tipos de ingreso: " + task.getException(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void cambiarColorHeader(View view) {
+        int[] pastelColors = {R.color.pastel_purple, R.color.pastel_yellow, R.color.pastel_pink, R.color.pastel_violet, R.color.pastel_teal, R.color.pastel_peach, R.color.pastel_lavender, R.color.pastel_mint, R.color.pastel_lilac, R.color.pastel_coral, R.color.pastel_brown, R.color.pastel_grey, R.color.pastel_turquoise, R.color.pastel_magenta, R.color.pastel_cyan, R.color.pastel_banana};
+
+        Random random = new Random();
+        int selectedColor = pastelColors[random.nextInt(pastelColors.length)];
+
+
+        LinearLayout linearLayout = view.findViewById(R.id.ingresos_type_header_layout);
+        linearLayout.setBackgroundColor(getResources().getColor(selectedColor));
     }
 }

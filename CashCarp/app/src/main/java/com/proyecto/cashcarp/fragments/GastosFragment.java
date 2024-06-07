@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.proyecto.cashcarp.clases.MyGastoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GastosFragment extends Fragment {
 
@@ -37,6 +39,7 @@ public class GastosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gastos, container, false);
 
+        cambiarColorHeader(view);
         sharedPreferences = requireContext().getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", null);
         db = FirebaseFirestore.getInstance();
@@ -84,5 +87,15 @@ public class GastosFragment extends Fragment {
                 Toast.makeText(requireContext(), "Error al cargar tipos de gasto: " + task.getException(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void cambiarColorHeader(View view) {
+        int[] pastelColors = {R.color.pastel_purple, R.color.pastel_yellow, R.color.pastel_pink, R.color.pastel_violet, R.color.pastel_teal, R.color.pastel_peach, R.color.pastel_lavender, R.color.pastel_mint, R.color.pastel_lilac, R.color.pastel_coral, R.color.pastel_brown, R.color.pastel_grey, R.color.pastel_turquoise, R.color.pastel_magenta, R.color.pastel_cyan, R.color.pastel_banana};
+
+        Random random = new Random();
+        int selectedColor = pastelColors[random.nextInt(pastelColors.length)];
+
+
+        LinearLayout linearLayout = view.findViewById(R.id.gastos_header_layout);
+        linearLayout.setBackgroundColor(getResources().getColor(selectedColor));
     }
 }

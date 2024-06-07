@@ -1,66 +1,88 @@
 package com.proyecto.cashcarp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AjustesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Random;
+
 public class AjustesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private SharedPreferences sharedPreferences;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String userId;
+    private SharedPreferences.Editor editor;
+    private SwitchCompat switchEnableTutorial;
+    private EditText editTextBudget;
 
-    public AjustesFragment() {
-        // Required empty public constructor
-    }
+    private FirebaseFirestore db;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AjustesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AjustesFragment newInstance(String param1, String param2) {
-        AjustesFragment fragment = new AjustesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_ajustes, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ajustes, container, false);
+        cambiarColorHeader(view);
+        db = FirebaseFirestore.getInstance();
+        sharedPreferences = requireContext().getSharedPreferences("com.proyecto.cashcarp", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", null);
+
+        editor = sharedPreferences.edit();
+
+        switchEnableTutorial = view.findViewById(R.id.switchEnableTutorial);
+        editTextBudget = view.findViewById(R.id.editTextBudget);
+        Button saveBudgetButton = view.findViewById(R.id.btnActualizarBudget);
+
+        // Inicializar SwitchCompat con el valor actual de las SharedPreferences
+        boolean tutorialHecho = sharedPreferences.getBoolean("tutorialHecho", false);
+        switchEnableTutorial.setChecked(!tutorialHecho);
+
+        // Configurar listener para el switch
+        switchEnableTutorial.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            editor.putBoolean("tutorialHecho", !isChecked);
+            editor.apply();
+        });
+
+        // Configurar listener para el botón de actualizar presupuesto
+        saveBudgetButton.setOnClickListener(v -> {
+            String newBudgetStr = editTextBudget.getText().toString();
+            if (!newBudgetStr.isEmpty()) {
+                try {
+                    db.collection("usuario").document(userId).update("budget", Double.parseDouble(newBudgetStr));
+                    Toast.makeText(requireContext(), "Presupuesto actualizado", Toast.LENGTH_SHORT).show();
+                } catch (NumberFormatException e) {
+                    Toast.makeText(requireContext(), "Ingrese un número válido", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(requireContext(), "El campo de presupuesto está vacío", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
+    }
+    private void cambiarColorHeader(View view) {
+        int[] pastelColors = {R.color.pastel_purple, R.color.pastel_yellow, R.color.pastel_pink, R.color.pastel_violet, R.color.pastel_teal, R.color.pastel_peach, R.color.pastel_lavender, R.color.pastel_mint, R.color.pastel_lilac, R.color.pastel_coral, R.color.pastel_brown, R.color.pastel_grey, R.color.pastel_turquoise, R.color.pastel_magenta, R.color.pastel_cyan, R.color.pastel_banana};
+
+        Random random = new Random();
+        int selectedColor = pastelColors[random.nextInt(pastelColors.length)];
+
+
+        LinearLayout linearLayout = view.findViewById(R.id.ajustes_header_layout);
+        linearLayout.setBackgroundColor(getResources().getColor(selectedColor));
     }
 }

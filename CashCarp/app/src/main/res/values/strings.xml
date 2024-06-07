@@ -59,4 +59,10 @@
     <string name="editar_gasto_text">Editar gasto</string>
     <string name="editar_btn_text">Editar</string>
     <string name="borrar_btn_text">Borrar</string>
+    <string name="ingresos_text">Ingresos</string>
+    <string name="editar_ingreso_text">Editar ingreso</string>
+    <string name="ajustes_text">Ajustes</string>
+    <string name="activar_tutorial_text">Activar tutorial</string>
+    <string name="cambiar_presupuesto_text">Cambiar presupuesto</string>
+    <string name="actualizar_text">Actualizar</string>
 </resources>
