@@ -18,13 +18,21 @@
 
         <activity
             android:name=".pantallas.MainScreen"
-            android:exported="false" />
+            android:exported="false"
+           />
         <activity
             android:name=".pantallas.CreateAccountActivity"
             android:exported="false" />
 
         <activity
             android:name=".pantallas.IniciarSesionScreen"
+            android:exported="false" />
+
+        <activity
+            android:name=".pantallas.CreateTypeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".pantallas.EditGastoActivity"
             android:exported="false" />
 
         <activity

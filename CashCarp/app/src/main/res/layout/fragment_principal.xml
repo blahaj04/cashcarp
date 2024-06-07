@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PrincipalFragment"
+    android:background="@color/material_dynamic_neutral_variant60">
+
+    <LinearLayout
+        android:id="@+id/principal_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pastel_blue"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="92dp"
+                android:layout_height="68dp"
+                android:src="@drawable/cashcarp_transparente" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_bold"
+                android:padding="8dp"
+                android:textSize="23sp"
+                android:text="@string/holaText"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@color/pastel_blue"
+                android:padding="8dp"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+                android:text="@string/userNamePantPrin"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+                android:padding="8dp"
+                android:text="@string/has_gastado_text"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/spendsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="23sp"
+                android:padding="8dp"
+                android:text=""
+                android:background="@color/pastel_red"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:text="@string/este_mes_text"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+                android:padding="8dp"
+                android:text="@string/has_recibido_text"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/incomesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="23sp"
+                android:padding="8dp"
+                android:text=""
+                android:background="@color/pastel_green"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+
+                android:padding="8dp"
+                android:text="@string/este_mes_text"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+                android:padding="8dp"
+                android:text="@string/te_quedan_text"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/budgetTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:fontFamily="@font/gotham_bold"
+                android:textSize="23sp"
+                android:padding="8dp"
+                android:text=""
+                android:background="@color/pastel_orange"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textSize="17sp"
+                android:fontFamily="@font/gotham_book"
+
+                android:padding="8dp"
+                android:text="@string/este_mes_text"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/habilitar_grafico_text"
+            android:fontFamily="@font/gotham_book"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchEnableGraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/graphContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:padding="16dp"
+        android:layout_marginTop="350dp"
+        android:gravity="center">
+
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/barChart"/>
+
+    </LinearLayout>
+
+</FrameLayout>

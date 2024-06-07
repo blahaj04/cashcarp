@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+
+        android:id="@+id/home_button_navbar"
+        android:icon="@drawable/home_screen_navbar_ico"
+        android:title="@string/home_text_navbar" />
+    <item
+
+        android:id="@+id/spends_button_navbar"
+        android:icon="@drawable/spends_screen_navbar_ico"
+        android:title="@string/spends_text_navbar" />
+    <item
+
+        android:id="@+id/add_button_navbar"
+        android:icon="@drawable/add_item_navbar_ico"
+        android:title="@string/add_text_navbar" />
+    <item
+
+        android:id="@+id/incomes_button_navbar"
+        android:icon="@drawable/income_screen_navbar_ico"
+        android:title="@string/incomes_text_navbar" />
+    <item
+
+        android:id="@+id/settings_button_navbar"
+        android:icon="@drawable/settings_screen_navbar_ico"
+        android:title="@string/settings_text_navbar" />
+</menu>
