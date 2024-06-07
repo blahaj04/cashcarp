@@ -27,6 +27,7 @@ public class SplashScreen extends AppCompatActivity {
         editor.putBoolean("tutorialHecho", false);
         editor.apply();
          */
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

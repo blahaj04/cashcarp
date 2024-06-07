@@ -5,11 +5,14 @@ public class TipoIngreso {
 
     private String nombreTipoIngreso;
 
-    public TipoIngreso(){
+    private String id;
+
+
+    public TipoIngreso() {
 
     }
 
-    public TipoIngreso(String color, String nombre){
+    public TipoIngreso(String color, String nombre) {
         this.color = color;
         this.nombreTipoIngreso = nombre;
     }
@@ -20,6 +23,14 @@ public class TipoIngreso {
 
     public void setNombreTipoIngreso(String nombreTipoIngreso) {
         this.nombreTipoIngreso = nombreTipoIngreso;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getColor() {

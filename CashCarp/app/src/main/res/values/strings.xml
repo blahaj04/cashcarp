@@ -44,4 +44,7 @@
     <string name="descripcion_text_crear_pant">Descripción</string>
     <string name="cantidad_text_crear_pant">Cantidad</string>
     <string name="gasto_ingreso_text_crear_pant">Gasto / Ingreso</string>
+    <string name="tipo_text_crear_pant">Tipo</string>
+    <string name="crear_tipo_btn_text">Crear tipo</string>
+    <string name="save_text_btn">Guardar</string>
 </resources>

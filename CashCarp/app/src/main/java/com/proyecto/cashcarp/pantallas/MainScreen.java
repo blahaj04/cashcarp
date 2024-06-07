@@ -1,5 +1,6 @@
 package com.proyecto.cashcarp.pantallas;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class MainScreen extends AppCompatActivity {
     private static final int INCOMES_BUTTON_ID = R.id.incomes_button_navbar;
     private static final int SETTINGS_BUTTON_ID = R.id.settings_button_navbar;
 
+    private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "AppPrefs";
     private static final String KEY_COLOR = "navbar_color";
 

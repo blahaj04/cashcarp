@@ -6,13 +6,24 @@ public class TipoGasto {
 
     private String nombreTipoGasto;
 
-    public TipoGasto(){
+    private String id;
+
+
+    public TipoGasto() {
 
     }
 
     public TipoGasto(String color, String nombreTipoGasto) {
         this.color = color;
         this.nombreTipoGasto = nombreTipoGasto;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getColor() {
