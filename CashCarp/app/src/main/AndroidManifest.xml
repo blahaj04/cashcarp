@@ -28,6 +28,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".pantallas.CreateTypeScreen"
+            android:exported="false" />
+
+        <activity
             android:name=".pantallas.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">

@@ -1,6 +1,7 @@
 package com.proyecto.cashcarp.pantallas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,18 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
+import com.proyecto.cashcarp.clases.TipoGasto;
 import com.proyecto.cashcarp.clases.TipoIngreso;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -31,7 +37,7 @@ public class CreateTypeScreen extends AppCompatActivity {
 
     private int typecolor;
 
-    private boolean colorSelected = false,isIngreso = false;
+    private boolean colorSelected = false, isIngreso = false;
 
     private SwitchCompat switchGastoIngreso;
 
@@ -39,6 +45,7 @@ public class CreateTypeScreen extends AppCompatActivity {
     private String userId;
 
     private FirebaseFirestore db;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +83,7 @@ public class CreateTypeScreen extends AppCompatActivity {
                 }
 
 
-                guardarObjeto(name, typecolor,isIngreso);
+                guardarObjeto(name, typecolor, isIngreso);
             }
         });
     }
@@ -84,10 +91,46 @@ public class CreateTypeScreen extends AppCompatActivity {
     private void guardarObjeto(String name, int typecolor, boolean isIngreso) {
 
 
-        if (isIngreso){
+        if (isIngreso) {
             TipoIngreso ti = new TipoIngreso(name, String.valueOf(typecolor));
 
-            db.collection("usuario").document(userId).collection("tipoIngreso").add(ti).onSu
+            db.collection("usuario").document(userId).collection("tipoIngreso").add(ti).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+
+                    Toast.makeText(CreateTypeScreen.this, "Tipo de ingreso guardado con exito ", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(CreateTypeScreen.this, MainScreen.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CreateTypeScreen.this, "Error al guardar el tipo de ingreso: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            TipoGasto tg = new TipoGasto(name, String.valueOf(typecolor));
+
+            db.collection("usuario").document(userId).collection("tipoGasto").add(tg).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+
+                    Toast.makeText(CreateTypeScreen.this, "Tipo de gasto guardado con exito ", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(CreateTypeScreen.this, MainScreen.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CreateTypeScreen.this, "Error al guardar el tipo de gasto: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

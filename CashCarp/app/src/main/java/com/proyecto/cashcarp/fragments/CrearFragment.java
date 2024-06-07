@@ -1,6 +1,7 @@
 package com.proyecto.cashcarp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ import com.proyecto.cashcarp.clases.Gasto;
 import com.proyecto.cashcarp.clases.Ingreso;
 import com.proyecto.cashcarp.clases.TipoGasto;
 import com.proyecto.cashcarp.clases.TipoIngreso;
+import com.proyecto.cashcarp.pantallas.CreateTypeScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,7 @@ public class CrearFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
+        cambiarColorHeader(view);
         cargarTipos();
 
         mostrarTipos(false);
@@ -86,6 +89,8 @@ public class CrearFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                Intent i = new Intent(getActivity(), CreateTypeScreen.class);
+                startActivity(i);
 
             }
         });
@@ -159,8 +164,8 @@ public class CrearFragment extends Fragment {
                     Toast.makeText(getContext(), "Error al guardar el ingreso: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
-            Gasto g = new Gasto(descripcion,Double.parseDouble(cantidad),Timestamp.now());
+        } else {
+            Gasto g = new Gasto(descripcion, Double.parseDouble(cantidad), Timestamp.now());
 
             db.collection("usuario").document(userId).collection("tipoIngreso").document(idTipo).collection("Ingresos").add(g).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
