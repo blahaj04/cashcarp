@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="160dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:background="@android:color/transparent">
 
     <LinearLayout
+        android:id="@+id/card_gasto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/pastel_red"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,6 +65,7 @@
                 android:fontFamily="@font/gotham_book"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+
                 />
         </LinearLayout>
 
@@ -94,7 +95,28 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="end">
 
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/editar_btn_text"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/pastel_green"/>
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/borrar_btn_text"
+                android:backgroundTint="@color/pastel_red"/>
+        </LinearLayout>
     </LinearLayout>
 
 

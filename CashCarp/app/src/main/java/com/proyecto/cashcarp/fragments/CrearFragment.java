@@ -153,7 +153,7 @@ public class CrearFragment extends Fragment {
         if (isIngreso) {
             Ingreso i = new Ingreso(descripcion, Double.parseDouble(cantidad), Timestamp.now());
 
-            db.collection("usuario").document(userId).collection("tipoIngreso").document(idTipo).collection("Ingresos").add(i).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("usuario").document(userId).collection("tipoIngreso").document(idTipo).collection("ingresos").add(i).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText(getContext(), "Ingreso guardado correctamente", Toast.LENGTH_SHORT).show();
@@ -167,7 +167,7 @@ public class CrearFragment extends Fragment {
         } else {
             Gasto g = new Gasto(descripcion, Double.parseDouble(cantidad), Timestamp.now());
 
-            db.collection("usuario").document(userId).collection("tipoIngreso").document(idTipo).collection("Ingresos").add(g).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("usuario").document(userId).collection("tipoGasto").document(idTipo).collection("gastos").add(g).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast.makeText(getContext(), "Gasto guardado correctamente", Toast.LENGTH_SHORT).show();
