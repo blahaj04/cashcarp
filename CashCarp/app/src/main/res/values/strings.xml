@@ -40,4 +40,8 @@
     <string name="has_recibido_text">Has recibido</string>
     <string name="te_quedan_text">Te quedan</string>
     <string name="no_hay_ningun_gasto_ni_ingreso_text">no hay ningun gasto ni ingreso</string>
+    <string name="crear_gasto_ingreso_text_crear_pant">Crear gasto/ingreso</string>
+    <string name="descripcion_text_crear_pant">Descripción</string>
+    <string name="cantidad_text_crear_pant">Cantidad</string>
+    <string name="gasto_ingreso_text_crear_pant">Gasto / Ingreso</string>
 </resources>
