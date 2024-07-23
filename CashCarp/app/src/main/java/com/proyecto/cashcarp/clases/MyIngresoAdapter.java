@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.proyecto.cashcarp.R;
 import com.proyecto.cashcarp.pantallas.EditGastoActivity;
+import com.proyecto.cashcarp.pantallas.EditIngresoActivity;
 
 import java.util.List;
 
@@ -70,9 +71,9 @@ public class MyIngresoAdapter extends RecyclerView.Adapter<MyIngresoViewHolder> 
                 int adapterPosition = holder.getAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     Ingreso currentIngreso = ingresoLista.get(adapterPosition);
-                    Intent intent = new Intent(context, EditGastoActivity.class);
-                    intent.putExtra("descripcionGasto", currentIngreso.getDescripcion());
-                    intent.putExtra("cantidadGasto", currentIngreso.getCantidad());
+                    Intent intent = new Intent(context, EditIngresoActivity.class);
+                    intent.putExtra("descripcionIngreso", currentIngreso.getDescripcion());
+                    intent.putExtra("cantidadIngreso", currentIngreso.getCantidad());
                     intent.putExtra("tipoId", currentIngreso.getTipoId());
                     intent.putExtra("id", currentIngreso.getId());
                     context.startActivity(intent);
